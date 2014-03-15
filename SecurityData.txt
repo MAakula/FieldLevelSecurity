@@ -1,0 +1,52 @@
+
+##Note: Column Order is important
+#Note: Do not worry about the Column/Table names; Follow the Column Order
+#Token(token name, token desc)
+#Expression(exp name, exp desc, exp type, property, value expression)
+#Rule(rule name/code, rule desc, token name, expression)
+
+#sample tables
+#token(token_c varchar2, token_x varchar2)
+#rule(rule_c varchar2, rule_x varchar2)
+#expression(expression_c varchar2, expression_x varchar2, expression_type_c char(1) (allowed S/D), property_x varchar2, value_expr_x varchar2
+#secrutity_permission(rule_c, token_c, rule_expr_x varchar2 (combination of expression_c)
+
+
+Token:sec.admin~Team - Admin
+#Token:sec.update~Team - Update
+#Token:sec.ps~Property Services Team
+#Token:sec.t1~T1 Team
+
+#Expression:E1~Expression for TRUE~S~TRUE~true
+#Expression:E2~Expression for FALSE~S~FALSE~false
+#Expression:E3~Expression For status_C~S~status_C~?: == 'ACTIVE' || ?: == 'OPEN' || ?: == 'ASDF'
+#Expression:E4~Expression For status_C~S~status_C~['ABANDON','FILLED'].indexOf(?:) != -1
+#Expression:E5~Expression for bridgeManager~S~bridge_type_c~?: == 'R'
+#Expression:E6~Dynamic Expression Test~D~bridgeManager~?: == userId || ?: == userId || ?: == userId
+#Expression:E7~Dynamic Expression Test~D~experience~?: >= expMin
+#Expression:E8~Dynamic Expression Test~D~experience~?: >= expMin && ?: <= expMax
+#Expression:E9~Date Test~D~dateOfBirth~?: == anotherDate
+#Expression:E10~Date Test~D~dateOfBirth~?: >= anotherDate
+#Expression:E11~Date Test~D~dateOfBirth~?: >= anotherDate && ?: <= anotherDate_1
+Expression:E12~Dynamic Expression Test [String]~D~bridgeManager~( ( [String].indexOf ( ?: ) != -1  ) || (  ?: == 'Ganesh'  ) )   
+#Expression:E13~Dynamic Expression Test [Number]~D~experience~[Number].indexOf(?:) != -1
+#Expression:E14~Dynamic Expression Test [Date]~D~anotherDate~[Date].indexOf(?:) != -1
+Expression:E15~Dynamic Expression Test [anotherProperty]~D~bridgeManager~([userId].indexOf(?:)!=-1)
+
+
+#Rule:DateRuleTest1~Date Rule Test1~sec.admin~E9
+#Rule:DateRuleTest2~Date Rule Test2~sec.admin~E10
+#Rule:DateRuleTest3~Date Rule Test3~sec.admin~E11
+#Rule:DynamicRule~Rule for Dynamic Value~sec.admin~E6
+#Rule:DynamicComplexRule~Rule for Dynamic Value with Complex expressions~sec.admin~(E3 || E4) && E5 && E6 && (E7 || E8)
+#Rule:ComplexRule~Rule for Multiple Objects~sec.admin~(E4 && E5)
+#Rule:RenderAddBtn~Rule For Add Btn For Documents~sec.admin~E1
+#Rule:DisableAddBtn~Rule For Add Btn For Documents~sec.admin~E2
+#Rule:AddBtn~Rule For Add Btn For Documents~sec.update~E1
+#Rule:UpdtBtn~Rule for Update or Save Btn for Bridge~sec.admin~(E3 || E4)
+#Rule:UpdtBtn~Rule for Update or Save Btn for Bridge~sec.ps~E4
+#Rule:UpdtBtn~Rule for Update or Save Btn for Bridge~sec.t1~(E4 && E5)
+#Rule:UpdtBtn~Rule for Update or Save Btn for Bridge~sec.update~((E3 || E4) && E5)
+#Rule:TESTRule1~asdf~sec.admin~E3 && E6
+Rule:TESTRule2~asdf~sec.admin~E15
+
